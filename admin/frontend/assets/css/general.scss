@@ -1,0 +1,33 @@
+body {
+    font-family: 'LatoWeb' !important;
+}
+
+.logo-name {
+    font-family: Roboto;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 0px #FFF;
+}
+
+.navbar-brand small {
+    text-shadow: 0 2px 0px #FFF;
+}
+
+.bold {
+    font-family: LatoWebBold;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.inline {
+    display: inline-block !important;
+}
+
+.status-select {
+  hr {
+    border-bottom-width: 0 !important;
+  }
+}

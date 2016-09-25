@@ -1,0 +1,10 @@
+node_modules/*
+
+package.json.*
+npm-debug.log
+
+*.sublime-workspace
+.DS_Store
+.fuse_hidden*
+
+*.zip
