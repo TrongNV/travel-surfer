@@ -6,8 +6,9 @@ module.exports = (App, mode) => {
 
   require('./Environment')(App, mode)
 
+  require('../api/routes')(App)
+
   require('../configs/Connection')(App.db_url)
 
-  require('../api/routes')(App)
 
 }

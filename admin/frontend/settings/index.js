@@ -15,11 +15,12 @@ export default {
         {
           name: 'offers',
           title: 'Offers',
-          func: (v) => {return v.length}
+          func: (v) => {return '('+v.length+')'}
         },
         {
           name: 'push_notifications',
-          title: 'Push Notifications'
+          title: 'Push Notifications',
+          func: (v) => {return '('+v+')'}
         },
         {
           name: 'status',

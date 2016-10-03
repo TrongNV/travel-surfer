@@ -5,10 +5,10 @@ var Router = require('express').Router()
       Orders: require('../controllers/Orders')
     }
 
-Router.get('/', Controllers.Orders.getAll)
-      .get('/:id', Controllers.Orders.findOne)
-      .post('/', Controllers.Orders.create)
-      .put('/:id', Controllers.Orders.update)
-      .delete('/:id', Controllers.Orders.destroy)
+Router.get('/orders', Controllers.Orders.getAll)
+      .get('/order/:id', Controllers.Orders.findOne)
+      .post('/order', Controllers.Orders.create)
+      .put('/order/:id', Controllers.Orders.update)
+      .delete('/order/:id', Controllers.Orders.destroy)
 
 module.exports = Router

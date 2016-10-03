@@ -3,6 +3,7 @@ import SelectField  from 'material-ui/SelectField';
 import MenuItem     from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton   from 'material-ui/FlatButton';
+import Badge        from 'material-ui/Badge';
 
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
@@ -35,7 +36,6 @@ export default class TableComponent extends React.Component {
                 return <TableHeaderColumn key={c}>{title}</TableHeaderColumn>
               })
             }
-            <TableHeaderColumn>Plug n Push</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={false}>
@@ -45,6 +45,7 @@ export default class TableComponent extends React.Component {
                 {
                   T.thead.map( ({name,func}, c) => {
                     let v = func ? func(order[name]) : order[name];
+                    console.log(name,v)
                     switch (name) {
                       case 'status' :
                         return <TableRowColumn key={c}>
@@ -62,13 +63,15 @@ export default class TableComponent extends React.Component {
                           </SelectField>
                         </TableRowColumn>
                         break;
+                      case 'offers' :
+                        return <TableRowColumn key={c}>
+                          <FlatButton label="offer" primary={true} onClick={addOffer.bind(null,o)}/> {v}
+                        </TableRowColumn>
+                        break;
                       default : return <TableRowColumn key={c}>{v}</TableRowColumn>
                     }
                   })
                 }
-                <TableRowColumn>
-                  <FlatButton label="offer" primary={true} onClick={addOffer.bind(null,o)}/>
-                </TableRowColumn>
               </TableRow>
             })
           }

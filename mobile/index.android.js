@@ -25,11 +25,13 @@ export default class travelsurfer extends Component {
     return (
       <View>
         <View style={ST.tour1bgContainer}>
-          <View style={TB.wrapper}>
-              <Text style={TB.humbergur}>Add</Text>
-              <Text style={TB.title}>This is the title</Text>
-              <Text style={TB.btn}>Like</Text>
-          </View>
+{
+  // <View style={TB.wrapper}>
+  //             <Text style={TB.humbergur}>Add</Text>
+  //             <Text style={TB.title}>This is the title</Text>
+  //             <Text style={TB.btn}>Like</Text>
+  //         </View>
+        }
           <Image source={{uri:tour1bg}} style={ST.tour1bg}>
             <Swiper
               dot={dot}
