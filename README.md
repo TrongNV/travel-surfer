@@ -1,20 +1,21 @@
 # TRAVEL SURFER
-## This is a memo to run development environment
+## this wiki is about personal development environment
+## still need redaction for standard preparation
 
-## 1. OS Environment
+## 1. System Environment
 ```
 npm i express -g
 npm i gulp -g
 ```
 
-## 2. BACKEND
+## 2. RUN APP
 ```
 $ gulp
 ```
 
-## 3. FRONTEND
+## 3. DB
 ```
-$ gulp
+$ mongod -dbpath ~/MongoDB
 ```
 
 ## 4. MOBILE
