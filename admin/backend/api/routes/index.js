@@ -17,10 +17,6 @@ var passport        = require('passport')
 
 module.exports = (App) => {
 
-  passport.use(new LocalStrategy(Models.user.authenticate()));
-  passport.serializeUser(Models.user.serializeUser());
-  passport.deserializeUser(Models.user.deserializeUser());
-
   App
     .use(function(req, res, next) {
       req.models = Models;
@@ -39,15 +35,16 @@ module.exports = (App) => {
     .use(passport.initialize())
     .use(passport.session())
 
-    .use('/api', Routes.order)
     .use('/api', Routes.user)
+    .use('/api', Routes.order)
 
     .get('/', function(req,res){
       res.render('index');
     })
   ;
 
-
-  // require('../../configs/Connection')(App.db_url)
+  passport.use(new LocalStrategy(Models.user.authenticate()));
+  passport.serializeUser(Models.user.serializeUser());
+  passport.deserializeUser(Models.user.deserializeUser());
 
 }
