@@ -8,34 +8,32 @@ module.exports = {
 
   getAll: function(req, res, next) {
     req.models.user.find(req.query, function(err, users){
-      if (err) return res.json({error: err}, 500);
+      if (err) res.status(err.status||500).json(err);
       res.status(200).json(_.orderBy(users, 'created_at', 'desc'));
     })
   },
 
   profile: function (req, res, next) {
     if (req.isAuthenticated())
-      return res.status(202).json({user:req.user});
-    res.status(401).json({err:'Unauthorized ! Not Authenticated'});
+      res.status(202).json({user:req.user});
+    res.status(401).json({msg:'Unauthorized ! Unauthenticated !!'});
   },
 
   findOne: function(req, res, next) {
     req.models.user.findOne({_id:req.params.id}, function(err, user) {
-      if (user === undefined) return res.notFound();
-      if (err) return next(err);
+      if (user === undefined) res.status(404).json(err);
+      if (err) res.status(err.status||500).json(err);
       res.status(200).json(user);
     });
   },
 
   create: function(req, res, next) {
-    req.models.user.register(new req.models.user({ username: req.body.username }), req.body.password, function(err, user) {
-      if (err) { // ex: name that already exists
-        console.log('ERR :',user);
-        return next(err);
-      }
+    const userLabels = { username: req.body.username, fullname: req.body.fullname, email: req.body.email };
+    req.models.user.register(new req.models.user(userLabels), req.body.password, function(err, user) {
+      if (err) res.status(409).json(err);
       passport.authenticate('local')(req, res, function(){
-        req.session.save(function (err) { // ex: username that doesn’t exist
-          if (err) return next(err);
+        req.session.save(function (err) {
+          if (err) res.status(err.status||500).json(err);
           res.status(201).json(user);
         });
       });
@@ -44,15 +42,15 @@ module.exports = {
 
   login: function(req, res, next) {
     req.session.save(function (err) {
-      if (err) return next(err);
-      res.status(201).json(req.user);
+      if (err) res.status(err.status||500).json(err);
+      res.status(200).json(req.user);
     });
   },
 
   logout: function(req, res, next) {
     req.logout();
     req.session.save(function (err) {
-      if (err) return next(err);
+      if (err) res.status(err.status||500).json(err);
       res.status(201).json(req.user);
     });
   },
@@ -60,19 +58,19 @@ module.exports = {
   update: function(req, res, next) {
     var id       = req.params.id
       , criteria = _.merge({}, req.params, req.body);
-    if (!id) return res.badRequest('No id provided.');
+    if (!id) res.status(400).json({msg:'No id provided.', err});
     req.models.user.update(id, criteria, function(err, user) {
-      if (user === undefined) return res.notFound();
-      if (err) return next(err);
+      if (user === undefined) res.status(404).json(err);
+      if (err) res.status(err.status||500).json(err);
       res.json(user);
     });
   },
 
   destroy: function(req, res, next) {
     var id = req.params.id
-    if (!id) return res.badRequest('No id provided.');
+    if (!id) res.status(400).json({msg:'No id provided.', err});
     req.models.user.findByIdAndRemove(id, req.body, function (err, result) {
-      if (err) return next(err);
+      if (err) res.status(err.status||500).json(err);
       res.json(result);
     });
   }

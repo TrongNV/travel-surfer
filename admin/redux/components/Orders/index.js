@@ -1,11 +1,11 @@
-import React              from 'react';
-import Spinner            from "react-spinkit"
-import { connect }        from "react-redux"
-import * as OrdersActions from "../../actions/ordersActions"
-import Table              from "../Templates/Table"
-import Toggle             from 'material-ui/Toggle';
-
+import React            from 'react';
+import Spinner          from "react-spinkit";
+import { connect }      from "react-redux";
+import Toggle           from 'material-ui/Toggle';
 import { Well, Button } from 'react-bootstrap';
+
+import * as OrdersActions from "../../actions/ordersActions";
+import OrdersTable        from "../Templates/ordersTable";
 
 
 @connect((store) => { return {store:store} })
@@ -59,7 +59,7 @@ export default class OrdersComponent extends React.Component {
             <Toggle label="orders without offers" defaultToggled={true}/>
           </div>
         </Well>
-        <Table data={orders} statusHandler={statusHandler}/>
+        <OrdersTable data={orders} statusHandler={statusHandler}/>
       </div>
     )
   }

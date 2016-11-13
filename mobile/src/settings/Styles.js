@@ -103,21 +103,26 @@ export const Modals = StyleSheet.create({
   },
 
   content: {
-    height: 300,
+    height: 450,
     backgroundColor: 'white',
     borderRadius: 10,
   },
 
-  typeAccountBox: {
+  selectTypeAccountBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 300,
+    height: 450,
+  },
+
+  fieldsBoxWrapper: {
+    padding: 10,
+    justifyContent: 'space-between',
+    height: 450,
   },
 
   fieldsBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 270,
   },
 
   close: {
@@ -127,7 +132,7 @@ export const Modals = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 
-  textBtn: {
+  typeAccountBtn: {
     width: 180,
     padding: 10,
     backgroundColor: '#006e9f',
@@ -136,14 +141,84 @@ export const Modals = StyleSheet.create({
     margin: 20,
   },
 
-  link: {
-    color: "#006e9f",
-    backgroundColor: '#EEE',
-    // padding: 5,
-    // margin: 5,
+  inputWithLabelWrapper: {
+    flexDirection: 'row',
+    flex: 1,
   },
 
-  backLink: {
-    color: "#006e9f"
+  inputWithLabelTextWrapper: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    marginRight: 20,
+    width: 80,
+  },
+
+  inputWithLabelText: {
+    fontWeight: '900',
+  },
+
+  inputWithLabelEntry: {
+    justifyContent: 'center',
+    width: 160,
+    alignItems: 'flex-start',
+  },
+
+  signUpBtn: {
+    alignItems: 'flex-end',
+  },
+
+  signUpBtnText: {
+    width: 153,
+    padding: 7,
+    backgroundColor: '#006e9f',
+    color: '#FFF',
+    textAlign: 'center',
+    margin: 10,
+    alignItems: 'flex-end',
+  },
+
+  signInField: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 200,
+  },
+
+  signInBtn: {
+    alignItems: 'center',
+  },
+
+  signInBtnText: {
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    width: 200,
+    backgroundColor: '#006e9f',
+    color: '#FFF',
+  },
+
+  forgetPassword: {
+    alignItems: 'center',
+  },
+
+  forgetPasswordText: {
+    alignItems: 'center',
+    textAlign: 'flex-end',
+    width: 200,
+    color: '#006e9f',
+    fontSize: 9,
+  }
+
+})
+
+export const Loader = StyleSheet.create({
+  ui: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: width,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    position: 'absolute',
+    top: 0,
+    zIndex: 999999,
   }
 })

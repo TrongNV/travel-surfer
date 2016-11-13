@@ -13,9 +13,9 @@ let gulp        = require('gulp')
 gulp
   .task('serve', function(){
     nodemon({
-      script: 'admin/App.js',
+      script: 'backend/App.js',
       ext: 'js',
-      watch: ['admin/backend']
+      watch: ['backend/**/*']
     })
     .on('start', function(){ console.log('Starting Node Server App.js') })
     browserSync.reload
@@ -23,7 +23,7 @@ gulp
 
   .task('browserify', function() {
     gutil.log('Compiling JS....')
-    browserify('admin/frontend/main.js')
+    browserify('admin/main.js')
       .transform('babelify', {
         presets: ["es2015","stage-1","stage-0","react"],
         plugins: ['transform-runtime','transform-decorators-legacy']
@@ -35,31 +35,32 @@ gulp
           this.emit("end")
         })
       .pipe(source('main.js'))
-      .pipe(gulp.dest('admin/public/js'))
+      .pipe(gulp.dest('public/js'))
       .pipe(browserSync.stream({once: true})
     )
   })
 
   .task('sass', function() {
-    return gulp.src('admin/frontend/assets/style.scss')
+    return gulp.src('admin/assets/style.scss')
       .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
       .pipe(sass().on('error', sass.logError))
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('admin/public/styles'));
+      .pipe(gulp.dest('public/styles'));
   })
 
   .task('sync', function() {
     browserSync.init({
-      proxy: { target: 'localhost:3000' }
-     ,files: ['public']
-     ,port: 8000
+      // proxy: { target: 'localhost:3000' },
+      // files: ['public'],
+      server: 'public',
+      port: 8000
     })
   })
 
   .task('default', ['serve','browserify','sass','sync'], function() {
-    gulp.watch('admin/frontend/**/*.js', ['browserify'])
-    gulp.watch('admin/frontend/assets/**/*.*', ['sass'])
-    gulp.watch('admin/public/**/*.*', browserSync.reload)
+    gulp.watch('admin/**/*.js', ['browserify'])
+    gulp.watch('admin/assets/**/*.*', ['sass'])
+    gulp.watch('public/**/*.*', browserSync.reload)
   })
 ;

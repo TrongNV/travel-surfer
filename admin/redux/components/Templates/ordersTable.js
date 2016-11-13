@@ -8,7 +8,7 @@ import Badge        from 'material-ui/Badge';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 
-export default class TableComponent extends React.Component {
+export default class OrdersTableComponent extends React.Component {
 
   static contextTypes = {
     structure: React.PropTypes.object,
@@ -21,12 +21,13 @@ export default class TableComponent extends React.Component {
 
   render () {
 
-    let {data,statusHandler}    = this.props
-      , {structure,styles}      = this.context
-      , {addOffer}              = this
+    let { data, statusHandler } = this.props
+      , { structure, styles }   = this.context
+      , { addOffer }            = this
       , T                       = structure.orders.table
       ;
 
+    console.log('orders :', data);
     return (
       <Table className="orders-table" height={window.innerHeight-200+'px'}>
         <TableHeader displaySelectAll={false}>
@@ -45,7 +46,6 @@ export default class TableComponent extends React.Component {
                 {
                   T.thead.map( ({name,func}, c) => {
                     let v = func ? func(order[name]) : order[name];
-                    console.log(name,v)
                     switch (name) {
                       case 'status' :
                         return <TableRowColumn key={c}>

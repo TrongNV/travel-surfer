@@ -35,12 +35,16 @@ module.exports = (App) => {
     .use(passport.initialize())
     .use(passport.session())
 
+    .use('/*', function(req, res, next) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+      res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      next();
+     })
+
     .use('/api', Routes.user)
     .use('/api', Routes.order)
-
-    .get('/', function(req,res){
-      res.render('index');
-    })
   ;
 
   passport.use(new LocalStrategy(Models.user.authenticate()));
