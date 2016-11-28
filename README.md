@@ -26,5 +26,7 @@ $ react-native start
 
 ## Files table:
 `/admin`   → react/redux travelSurfer administration
+
 `/backend` → node/express api
+
 `/mobile`  → react-native app
